@@ -121,12 +121,23 @@ class MainActivity : AppCompatActivity() {
         if (lemonadeState == "select"){
             lImage.setImageResource(R.drawable.lemon_squeeze)
             lemonadeState = "squeeze"
+            val lemon = lemonTree
+            lemonSize = lemon.pick()
             lText.setText(R.string.lemon_squeeze)
         }
         else if (lemonadeState == "squeeze"){
-            lImage.setImageResource(R.drawable.lemon_drink)
-            lemonadeState = "drink"
-            lText.setText(R.string.lemon_drink)
+            if (lemonSize >0 ){
+                lemonSize -= 1
+                squeezeCount += 1
+            }else{
+                lImage.setImageResource(R.drawable.lemon_drink)
+                lemonadeState = "drink"
+                lText.setText(R.string.lemon_drink)
+                squeezeCount = 0
+                lemonSize = -1
+            }
+
+
         }else if (lemonadeState == "drink"){
             lImage.setImageResource(R.drawable.lemon_restart)
             lemonadeState = "restart"
